@@ -22,43 +22,43 @@ public class FileUtil {
 	public static Logger log = Logger.getLogger(FileUtil.class); 
 	
 	/**
-	 * Èç¹ûÊÇÄ¿Â¼£¬ÔòÏÂÃæµÄÎÄ¼şºÍËùÓĞ×ÓÄ¿Â¼ÖĞµÄÎÄ¼ş¶¼ÒªÉ¾³ı
-	     Ê¹ÓÃµİ¹é¡£Éæ¼°ÄÚÈİ¡£ÅĞ¶ÏÄ¿Â¼µÄ´æÔÚĞÔ£¬ÅĞ¶ÏÊÇ·ñÎªÄ¿Â¼»òÎÄ¼ş£¬É¾³ı¡£
+	 * å¦‚æœæ˜¯ç›®å½•ï¼Œåˆ™ä¸‹é¢çš„æ–‡ä»¶å’Œæ‰€æœ‰å­ç›®å½•ä¸­çš„æ–‡ä»¶éƒ½è¦åˆ é™¤
+	     ä½¿ç”¨é€’å½’ã€‚æ¶‰åŠå†…å®¹ã€‚åˆ¤æ–­ç›®å½•çš„å­˜åœ¨æ€§ï¼Œåˆ¤æ–­æ˜¯å¦ä¸ºç›®å½•æˆ–æ–‡ä»¶ï¼Œåˆ é™¤ã€‚
 
 	 * @param fileName
 	 */
 	public static void delFilePath(String fileName) {
 		
 		File file = new File(fileName);
-		// ÎÄ¼ş²»´æÔÚ  ÔòÖ±½Ó·µ»Ø
+		// æ–‡ä»¶ä¸å­˜åœ¨  åˆ™ç›´æ¥è¿”å›
 		if(!file.exists()) {
 			return;
 		}
 		
-		// Èç¹ûÊÇÎÄ¼ş  ÔòÉ¾³ıºó·µ»Ø
+		// å¦‚æœæ˜¯æ–‡ä»¶  åˆ™åˆ é™¤åè¿”å›
 		if(file.isFile()) {
-			log.info(" É¾³ıÎÄ¼ş " + fileName);
+			log.info(" åˆ é™¤æ–‡ä»¶ " + fileName);
 			file.delete();
 			return;
 		}
 		
-		//Èç¹ûÊÇÄ¿Â¼
+		//å¦‚æœæ˜¯ç›®å½•
 		if(file.isDirectory()) {
-			// ÔòÁĞ³öÄ¿Â¼ÏÂËùÓĞµÄ×ÓÄ¿Â¼ºÍÎÄ¼ş
+			// åˆ™åˆ—å‡ºç›®å½•ä¸‹æ‰€æœ‰çš„å­ç›®å½•å’Œæ–‡ä»¶
 			 String[] list = file.list();
-			 //Õë¶ÔÃ¿Ò»Ïî
+			 //é’ˆå¯¹æ¯ä¸€é¡¹
 			 for (String subPath : list) {
-				 //µ÷ÓÃÉ¾³ı¹¦ÄÜ
+				 //è°ƒç”¨åˆ é™¤åŠŸèƒ½
 				 delFilePath(fileName + "/" + subPath);
 			}
-			 log.info(" ------------ É¾³ıÎÄ¼ş ¼Ğ £º " + fileName); 
+			 log.info(" ------------ åˆ é™¤æ–‡ä»¶ å¤¹ ï¼š " + fileName); 
 			file.delete(); 
 		}
 		
 		
 	}
 	
-	//3.5.2»ñÈ¡ÎÄ¼şÀ©Õ¹Ãû
+	//3.5.2è·å–æ–‡ä»¶æ‰©å±•å
 	/**
 	 * 
 	 * @param fileName
@@ -66,11 +66,11 @@ public class FileUtil {
 	 */
 	public static String getSuffix(String fileName) {
 		int dotIndex = fileName.lastIndexOf('.');
-		//Ã»ÓĞÀ©Õ¹Ãû
+		//æ²¡æœ‰æ‰©å±•å
 		if(dotIndex<0) {
 			return "";
 		}
-		//×îºóÒ»Î»ÊÇ .
+		//æœ€åä¸€ä½æ˜¯ .
 		if(dotIndex>=fileName.length()) {
 			return "";
 		}
@@ -91,7 +91,7 @@ public class FileUtil {
 	}
 	
 	/**
-	 * ·µ»ØÎÄ¼şÒÔÖ¸¶¨µ¥Î»´óĞ¡±íÊ¾
+	 * è¿”å›æ–‡ä»¶ä»¥æŒ‡å®šå•ä½å¤§å°è¡¨ç¤º
 	 */
 	public long  getSize(String fileName,FileUnit fileUnit) {
 		File file = new File(fileName);
@@ -116,15 +116,15 @@ public class FileUtil {
 		}
 		
 	}
-	//¶Á³öÖ¸¶¨ÎÄ¼şÖĞµÄÊı¾İ½øĞĞ·Ö¸î×é³É¶ÔÏó
-public static List fileToBean(String fileName,Constructor constructor,String spli) throws IOException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	//è¯»å‡ºæŒ‡å®šæ–‡ä»¶ä¸­çš„æ•°æ®è¿›è¡Œåˆ†å‰²ç»„æˆå¯¹è±¡
+public static List fileToBean(String fileName,Constructor constructor) throws IOException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		File file = new File(fileName);
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 		String lineString=null;
 		List  list = new ArrayList();
 		while((lineString =  bufferedReader.readLine()) !=null){
-			String[] split = lineString.split(spli);
+			String[] split = lineString.split("\\");
 			Object object = constructor.newInstance(split);
 			list.add(object);
 			
@@ -133,7 +133,7 @@ public static List fileToBean(String fileName,Constructor constructor,String spl
 		return list;
 		
 	}
-//»ñÈ¡ÎÄ¼ş¼ĞÏÂµÄËùÓĞÎÄ¼ş
+//è·å–æ–‡ä»¶å¤¹ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
 		public static List<String> getFileList(String pathName){
 			String[] list = new File(pathName).list();
 			 List<String> fileList = new ArrayList<String>();
@@ -145,7 +145,7 @@ public static List fileToBean(String fileName,Constructor constructor,String spl
 			return fileList;
 			
 		}
-		//¶ÁÈ¡ÎÄ¼ş
+		//è¯»å–æ–‡ä»¶
 		public static String readFile(String fileName) throws IOException {
 		
 			StringBuilder sb = new StringBuilder();
@@ -160,7 +160,7 @@ public static List fileToBean(String fileName,Constructor constructor,String spl
 			return sb.toString();
 		}
 		
-		//ÎÄ¼ş×ªBEAN
+		//æ–‡ä»¶è½¬BEAN
 		public static void fileToBean(String string, Class<String> class1,
 				Class<String> class2, Class<String> class3, Class<String> class4,
 				Class<String> class5) {
